@@ -19,6 +19,18 @@ type Booking struct {
 	numberOfTickets   int
 	// isOptedInForNewsletter bool
 }
+// struct methods
+func (booking Booking) getName() string {
+	return booking.firstName + " " + booking.lastName
+}
+
+func (booking *Booking) setNumberOfTickets(numberOfTickets int) {
+	booking.numberOfTickets = numberOfTickets
+}
+// static methods
+func (booking Booking) setName(name string) {
+	booking.firstName = name
+}
 
 var wg = sync.WaitGroup {}
 
@@ -96,11 +108,13 @@ func bookTicket(userTickets int, firstName string, lastName string, email string
 
 func sendTicket(booking Booking) {
 	time.Sleep(10 * time.Second)
+	booking.getName()
 	ticket := fmt.Sprintf("%v tickets for %v\n", booking.numberOfTickets, booking.email)
 	fmt.Println("###########")
 	fmt.Printf("Sending ticket:\n %v to email address %v\n", ticket, booking.email)
 	fmt.Println("###########")
 	wg.Done()
+	booking.setNumberOfTickets(booking.numberOfTickets - 1)
 }
 
 // map - slice - struct
