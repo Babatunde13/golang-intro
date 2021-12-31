@@ -23,6 +23,7 @@ type Booking struct {
 var wg = sync.WaitGroup {}
 
 func main() {
+	routines()
 	greetUsers()
 
 	for {
@@ -95,7 +96,7 @@ func bookTicket(userTickets int, firstName string, lastName string, email string
 
 func sendTicket(booking Booking) {
 	time.Sleep(10 * time.Second)
-	var ticket = fmt.Sprintf("%v tickets for %v\n", booking.numberOfTickets, booking.email)
+	ticket := fmt.Sprintf("%v tickets for %v\n", booking.numberOfTickets, booking.email)
 	fmt.Println("###########")
 	fmt.Printf("Sending ticket:\n %v to email address %v\n", ticket, booking.email)
 	fmt.Println("###########")
